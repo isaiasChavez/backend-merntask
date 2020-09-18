@@ -16,7 +16,7 @@ module.exports = function (req, res, next) {
     req.usuario = cifrado.usuario;
     next();
   } catch (error) {
-    res.status(4001).json({ msg: "token no valido" });
+    res.status(401).json({ msg: "token no valido" });
   }
 
   //validar el token

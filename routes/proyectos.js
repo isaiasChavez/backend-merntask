@@ -12,6 +12,23 @@ router.post(
   [check("nombre", "El nombre del proyecto es obligatorio").not().isEmpty()],
   ProyectoController.crearProyecto
 );
-router.get("/", auth, ProyectoController.crearProyecto);
+//Obtener todos los proyectos del usuario autenticado
+router.get("/", auth, ProyectoController.obtenerProyectos);
+
+//Actualizar los proyectos
+router.put(
+  "/:id",
+  auth,
+  [check("nombre", "El nombre del proyecto es obligatorio").not().isEmpty()],
+  ProyectoController.actualizarProyecto
+);
+
+//Eliminar proyecto
+router.delete(
+  "/:id",
+  auth,
+  [check("nombre", "El nombre del proyecto es obligatorio").not().isEmpty()],
+  ProyectoController.eliminarProyecto
+);
 
 module.exports = router;
