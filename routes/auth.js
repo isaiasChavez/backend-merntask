@@ -1,23 +1,16 @@
 //RUTAS PARA AUTENTICAR EL USUARIO
 const express = require("express");
 const router = express.Router();
-const { check } = require("express-validator");
+const auth = require("../middleware/auth");
 
 const AuthController = require("../controllers/AuthController");
 
-//crear usuario
+//iniciar sesion usuario
 
 //api/auth
 
-router.post(
-  "/",
-  [
-    check("email", "Agrega un email válido").isEmail(),
-    check("password", "El password debe ser de mínimo 6 caracteres").isLength({
-      min: 6,
-    }),
-  ],
-  AuthController.autenticarUsuario
-);
+router.post("/", AuthController.autenticarUsuario);
+//Obtiene el usuario autenticado
+router.get("/", auth, AuthController.usuarioAutenticado);
 
 module.exports = router;
